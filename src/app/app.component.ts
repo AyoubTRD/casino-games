@@ -10,7 +10,5 @@ export class AppComponent {
 
   handleClick() {
     console.log('Hello world');
-
-    return 'hello world';
   }
 }
