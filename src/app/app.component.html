@@ -1,1 +1,10 @@
-<app-tabbar></app-tabbar> <app-game-list></app-game-list>
+<app-tabbar
+  [categories]="categories"
+  (handleCategoriesChange)="handleCategoriesChange($event)"
+  [showJackpotOnly]="showJackpotGamesOnly"
+  (handleJackpotSelect)="handleShowJackpots()"
+></app-tabbar>
+<app-game-list
+  [showJackpotGamesOnly]="showJackpotGamesOnly"
+  [categories]="categories"
+></app-game-list>

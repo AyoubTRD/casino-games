@@ -1,19 +1,21 @@
-<div class="px-12 lg:px-20 py-8 mx-auto max-w-screen-2xl">
+<div class="px-12 py-8 mx-auto lg:px-20 max-w-screen-2xl">
   <ul
     class="grid w-full xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-x-4 gap-y-8"
     *ngIf="!isLoading"
   >
-    <li
-      *ngFor="let game of games"
-      class="cursor-pointer relative transition hover:scale-125 hover:z-10"
-    >
-      <img
-        src="{{ game.image }}"
-        alt="{{ game.name }}'s image"
-        class="w-full h-44 rounded-lg"
-      />
-    </li>
+    <app-game-list-item
+      *ngFor="let game of filteredGames"
+      [game]="game"
+      [selectedCategories]="categories"
+    ></app-game-list-item>
   </ul>
 
   <div *ngIf="isLoading">Loading...</div>
+
+  <div
+    *ngIf="!isLoading && !error && !filteredGames.length"
+    class="text-center mt-52"
+  >
+    <app-not-found></app-not-found>
+  </div>
 </div>

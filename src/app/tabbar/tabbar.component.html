@@ -1,8 +1,13 @@
-<nav class="h-12 bg-gray-800 grid grid-cols-9">
+<nav class="grid h-12 grid-cols-10 bg-gray-800">
   <button
-    *ngFor="let item of items"
-    class="bg-transparent transition hover:bg-green-400 text-white font-medium"
+    *ngFor="let button of buttons"
+    [ngClass]="{
+      'font-medium text-white': true,
+      'hover:bg-green-400': !isSelected(button),
+      'bg-green-400': isSelected(button)
+    }"
+    (click)="handleClick(button)"
   >
-    {{ item }}
+    {{ button.label }}
   </button>
 </nav>

@@ -6,9 +6,17 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  title = 'casino-games';
+  categories = ['new'];
 
-  handleClick() {
-    console.log('Hello world');
+  showJackpotGamesOnly = false;
+
+  handleCategoriesChange(categories: string[]) {
+    this.showJackpotGamesOnly = false;
+    this.categories = categories;
+  }
+
+  handleShowJackpots() {
+    this.categories = [];
+    this.showJackpotGamesOnly = true;
   }
 }

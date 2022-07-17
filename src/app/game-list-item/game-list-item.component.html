@@ -1,1 +1,15 @@
-<p>game-list-item works!</p>
+<li
+  class="relative overflow-hidden transition rounded-md cursor-pointer hover:scale-125 hover:z-10"
+>
+  <img
+    src="{{ game.image }}"
+    alt="{{ game.name }}'s image"
+    class="w-full rounded-lg h-44"
+  />
+  <div
+    *ngIf="!!game.jackpotAmount"
+    class="absolute top-0 left-0 flex items-center justify-center w-full h-10 font-bold text-white bg-gray-900 bg-opacity-30"
+  >
+    {{ game.jackpotAmount | currency }}
+  </div>
+</li>

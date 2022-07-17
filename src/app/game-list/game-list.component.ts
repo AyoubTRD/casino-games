@@ -1,35 +1,68 @@
-import { Component, OnInit } from '@angular/core';
-
-interface Game {
-  name: string;
-  id: string;
-  image: string;
-  tags: string[];
-}
+import {
+  Component,
+  Input,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
+import { GamesService } from './games.service';
+import { IGame } from './game';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-game-list',
   templateUrl: './game-list.component.html',
   styleUrls: ['./game-list.component.css'],
 })
-export class GameListComponent implements OnInit {
-  games: Game[] = [];
+export class GameListComponent implements OnInit, OnChanges, OnDestroy {
+  @Input()
+  categories!: string[];
+  @Input()
+  showJackpotGamesOnly!: boolean;
+
+  games: IGame[] = [];
+  filteredGames: IGame[] = [];
 
   isLoading = true;
+  error = false;
 
-  async ngOnInit(): Promise<void> {
-    const res = await fetch(
-      'http://stage.whgstage.com/front-end-test/games.php'
-    );
+  service: GamesService;
+  sub!: Subscription;
 
-    if (!res.ok) {
-      console.log('error');
+  constructor(service: GamesService) {
+    this.service = service;
+  }
+
+  ngOnInit(): void {
+    this.sub = this.service.getGames().subscribe({
+      next: (games) => {
+        this.games = games;
+        this.isLoading = false;
+        this.filterGames();
+      },
+      error: () => (this.error = true),
+    });
+  }
+
+  filterGames() {
+    if (this.showJackpotGamesOnly) {
+      this.filteredGames = this.games.filter((game) => !!game.jackpotAmount);
       return;
     }
 
-    const data: Game[] = await res.json();
+    this.filteredGames = this.games.filter((game) =>
+      game.categories.some((category) => this.categories.includes(category))
+    );
+  }
 
-    this.games = data;
-    this.isLoading = false;
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['categories'] || changes['showJackpotGamesOnly']) {
+      this.filterGames();
+    }
+  }
+
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }
