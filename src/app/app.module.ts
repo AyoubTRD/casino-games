@@ -1,24 +1,35 @@
-import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
+import { APP_INITIALIZER, ErrorHandler, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
-import { GameListComponent } from './games/game-list/game-list.component';
-import { TabbarComponent } from './shared/tabbar/tabbar.component';
-import { GameListItemComponent } from './games/game-list-item/game-list-item.component';
-import { GamesService } from './games/games.service';
-import { EmptyStateComponent } from './shared/empty-state/empty-state.component';
-import { HttpClientModule } from '@angular/common/http';
+
+import * as Sentry from '@sentry/angular';
+import { Router } from '@angular/router';
+import { AppRoutingModule } from './app-routing.module';
+import { HomeModule } from './home/home.module';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    GameListComponent,
-    TabbarComponent,
-    GameListItemComponent,
-    EmptyStateComponent,
+  declarations: [AppComponent],
+  imports: [BrowserModule, HttpClientModule, AppRoutingModule, HomeModule],
+  providers: [
+    {
+      provide: ErrorHandler,
+      useValue: Sentry.createErrorHandler({
+        showDialog: true,
+      }),
+    },
+    {
+      provide: Sentry.TraceService,
+      deps: [Router],
+    },
+    {
+      provide: APP_INITIALIZER,
+      useFactory: () => () => {},
+      deps: [Sentry.TraceService],
+      multi: true,
+    },
   ],
-  imports: [BrowserModule, HttpClientModule],
-  providers: [GamesService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

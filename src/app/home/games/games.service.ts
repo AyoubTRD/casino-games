@@ -1,9 +1,5 @@
-import { Injectable } from '@angular/core';
-
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-
-import { GAMES_ENDPOINT, JACKPOTS_ENDPOINT } from 'src/constants/global';
-import { IGame } from './game';
+import { Injectable } from '@angular/core';
 import {
   catchError,
   map,
@@ -12,6 +8,11 @@ import {
   throwError,
   timer,
 } from 'rxjs';
+import { GAMES_ENDPOINT, JACKPOTS_ENDPOINT } from 'src/constants/api';
+
+import * as Sentry from '@sentry/angular';
+
+import { IGame } from './game';
 
 interface IJackpot {
   game: string;
@@ -47,9 +48,7 @@ export class GamesService {
   }
 
   private handleError(err: HttpErrorResponse) {
-    // Report error to Sentry
-    console.error(err);
-
+    Sentry.captureException(err);
     return throwError(() => err);
   }
 }

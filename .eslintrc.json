@@ -17,6 +17,8 @@
       "rules": {
         "simple-import-sort/imports": "warn",
 
+        // "no-unused-vars": "error",
+
         "@angular-eslint/directive-selector": [
           "error",
           {

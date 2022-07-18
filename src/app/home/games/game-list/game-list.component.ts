@@ -6,9 +6,10 @@ import {
   OnInit,
   SimpleChanges,
 } from '@angular/core';
-import { GamesService } from '../games.service';
-import { IGame } from '../game';
 import { Subscription } from 'rxjs';
+
+import { IGame } from '../game';
+import { GamesService } from '../games.service';
 
 @Component({
   selector: 'app-game-list',
