@@ -1,11 +1,11 @@
-<li
-  class="flex justify-center w-auto overflow-hidden transition cursor-pointer hover:scale-125 hover:z-10"
->
-  <div class="relative overflow-hidden rounded-md">
+<li class="flex justify-center cursor-pointer hover:z-10">
+  <div
+    class="relative overflow-hidden transition rounded-md hover:scale-125 hover:z-10"
+  >
     <img
       src="{{ game.image }}"
       alt="{{ game.name }}'s image"
-      class="rounded-lg md:w-full h-44"
+      class="rounded-lg md:w-full h-30 sm:h-48 md:h-44"
     />
     <div
       *ngIf="!!game.jackpotAmount"
