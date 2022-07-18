@@ -1,11 +1,10 @@
 import { HttpClientModule } from '@angular/common/http';
 import { APP_INITIALIZER, ErrorHandler, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { Router } from '@angular/router';
+import * as Sentry from '@sentry/angular';
 
 import { AppComponent } from './app.component';
-
-import * as Sentry from '@sentry/angular';
-import { Router } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { HomeModule } from './home/home.module';
 

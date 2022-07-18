@@ -1,5 +1,6 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import * as Sentry from '@sentry/angular';
 import {
   catchError,
   map,
@@ -9,8 +10,6 @@ import {
   timer,
 } from 'rxjs';
 import { GAMES_ENDPOINT, JACKPOTS_ENDPOINT } from 'src/constants/api';
-
-import * as Sentry from '@sentry/angular';
 
 import { IGame } from './game';
 
