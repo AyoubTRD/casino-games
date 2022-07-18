@@ -13,17 +13,10 @@
         "plugin:@angular-eslint/recommended",
         "plugin:@angular-eslint/template/process-inline-templates"
       ],
+      "plugins": ["simple-import-sort"],
       "rules": {
-        "sort-imports": [
-          "warn",
-          {
-            "ignoreCase": false,
-            "ignoreDeclarationSort": false,
-            "ignoreMemberSort": false,
-            "memberSyntaxSortOrder": ["none", "all", "multiple", "single"],
-            "allowSeparatedGroups": false
-          }
-        ],
+        "simple-import-sort/imports": "warn",
+
         "@angular-eslint/directive-selector": [
           "error",
           {
