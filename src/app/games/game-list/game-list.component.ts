@@ -6,8 +6,8 @@ import {
   OnInit,
   SimpleChanges,
 } from '@angular/core';
-import { GamesService } from './games.service';
-import { IGame } from './game';
+import { GamesService } from '../games.service';
+import { IGame } from '../game';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -35,7 +35,7 @@ export class GameListComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.sub = this.service.getGames().subscribe({
+    this.sub = this.service.subscribeToGames().subscribe({
       next: (games) => {
         this.games = games;
         this.isLoading = false;

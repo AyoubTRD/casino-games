@@ -1,18 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NotFoundComponent } from './not-found.component';
+import { EmptyStateComponent } from './empty-state.component';
 
 describe('NotFoundComponent', () => {
-  let component: NotFoundComponent;
-  let fixture: ComponentFixture<NotFoundComponent>;
+  let component: EmptyStateComponent;
+  let fixture: ComponentFixture<EmptyStateComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ NotFoundComponent ]
-    })
-    .compileComponents();
+      declarations: [EmptyStateComponent],
+    }).compileComponents();
 
-    fixture = TestBed.createComponent(NotFoundComponent);
+    fixture = TestBed.createComponent(EmptyStateComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
