@@ -13,13 +13,11 @@ interface TabbarButton {
 export class TabbarComponent {
   @Input()
   categories!: string[];
-
   @Input()
   showJackpotOnly!: boolean;
 
   @Output()
   handleCategoriesChange = new EventEmitter<string[]>();
-
   @Output()
   handleJackpotSelect = new EventEmitter();
 

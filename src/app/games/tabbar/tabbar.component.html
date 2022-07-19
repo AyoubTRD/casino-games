@@ -4,7 +4,7 @@
   <button
     *ngFor="let button of buttons"
     [ngClass]="{
-      'font-medium text-white h-full inline-block px-5 w-48 md:w-auto': true,
+      'font-medium whitespace-nowrap text-white h-full inline-block px-5 w-48 md:w-auto': true,
       'hover:bg-green-400': !isSelected(button),
       'bg-green-400': isSelected(button)
     }"
