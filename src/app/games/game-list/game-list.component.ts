@@ -56,6 +56,10 @@ export class GameListComponent implements OnInit, OnChanges, OnDestroy {
     );
   }
 
+  identifyGame(_index: number, game: IGame) {
+    return game.id;
+  }
+
   ngOnChanges(changes: SimpleChanges) {
     if (changes['categories'] || changes['showJackpotGamesOnly']) {
       this.filterGames();

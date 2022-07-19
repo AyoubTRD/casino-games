@@ -4,7 +4,7 @@
     *ngIf="!isLoading"
   >
     <app-game-list-item
-      *ngFor="let game of filteredGames"
+      *ngFor="let game of filteredGames; trackBy: identifyGame"
       [game]="game"
       [selectedCategories]="categories"
     ></app-game-list-item>
