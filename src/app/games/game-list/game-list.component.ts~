@@ -1,22 +1,22 @@
 import {
   Component,
   Input,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  SimpleChanges,
 } from '@angular/core';
+import { Subscription } from 'rxjs';
 
 import { IGame } from '../game';
+import { GamesService } from '../games.service';
 
 @Component({
   selector: 'app-game-list',
   templateUrl: './game-list.component.html',
 })
-export class GameListComponent {
+export class GameListComponent implements OnInit, OnChanges, OnDestroy {
   @Input()
   categories!: string[];
   
-  @Input()
-  games!: IGame[]
-  
-  identifyGame(_index: number, game: IGame) {
-    return game.id
-  }
 }

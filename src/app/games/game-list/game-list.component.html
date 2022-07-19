@@ -1,23 +1,11 @@
-<div class="px-4 py-8 mx-auto md:px-12 lg:px-20 max-w-screen-2xl">
-  <ul
-    class="grid w-full xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-x-4 gap-y-8"
-    *ngIf="!isLoading"
-  >
-    <app-game-list-item
-      *ngFor="let game of filteredGames; trackBy: identifyGame"
-      [game]="game"
-      [selectedCategories]="categories"
-    ></app-game-list-item>
-  </ul>
+<ul
+  class="grid w-full xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-x-4 gap-y-8"
+>
+  <app-game-list-item
+    *ngFor="let game of games; trackBy: identifyGame"
+    [game]="game"
+    [selectedCategories]="categories"
+  ></app-game-list-item>
+</ul>
 
-  <div *ngIf="isLoading">Loading...</div>
 
-  <div
-    *ngIf="!isLoading && !error && !filteredGames.length"
-    class="mt-24 text-center md:mt-52"
-  >
-    <app-empty-state
-      subtitle="No games were found for the selected category"
-    ></app-empty-state>
-  </div>
-</div>

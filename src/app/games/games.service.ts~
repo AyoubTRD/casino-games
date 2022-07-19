@@ -14,6 +14,7 @@ import { environment } from 'src/environments/environment';
 
 import { IGame } from './game';
 
+
 export const GAMES_ENDPOINT = environment.backendUrl + '/games.php';
 export const JACKPOTS_ENDPOINT = environment.backendUrl + '/jackpots.php';
 

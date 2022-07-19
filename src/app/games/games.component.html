@@ -1,0 +1,25 @@
+<app-tabbar
+  [categories]="categories"
+  (handleCategoriesChange)="handleCategoriesChange($event)"
+  [showJackpotOnly]="showJackpotGamesOnly"
+  (handleJackpotSelect)="handleShowJackpots()"
+></app-tabbar>
+
+<div class="px-4 py-8 mx-auto md:px-12 lg:px-20 max-w-screen-2xl">
+    <app-game-list
+      [categories]="categories"
+      [games]="filteredGames"
+    ></app-game-list>
+
+  <div *ngIf="isLoading">Loading...</div>
+
+  <div
+    *ngIf="!isLoading && !error && !filteredGames.length"
+    class="mt-24 text-center md:mt-52"
+  >
+    <app-empty-state
+      subtitle="No games were found for the selected category"
+    ></app-empty-state>
+  </div>
+</div>
+
