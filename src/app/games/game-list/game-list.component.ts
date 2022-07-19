@@ -1,7 +1,4 @@
-import {
-  Component,
-  Input,
-} from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 import { IGame } from '../game';
 
@@ -12,11 +9,11 @@ import { IGame } from '../game';
 export class GameListComponent {
   @Input()
   categories!: string[];
-  
+
   @Input()
-  games!: IGame[]
-  
+  games!: IGame[];
+
   identifyGame(_index: number, game: IGame) {
-    return game.id
+    return game.id;
   }
 }

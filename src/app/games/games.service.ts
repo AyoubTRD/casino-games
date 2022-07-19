@@ -9,7 +9,6 @@ import {
   throwError,
   timer,
 } from 'rxjs';
-
 import { environment } from 'src/environments/environment';
 
 import { IGame } from './game';

@@ -1,8 +1,14 @@
-import { Component, OnInit, OnChanges, OnDestroy, SimpleChanges } from '@angular/core';
-import { Subscription } from "rxjs"
+import {
+  Component,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
+import { Subscription } from 'rxjs';
 
-import { IGame } from "./game";
-import { GamesService } from "./games.service"
+import { IGame } from './game';
+import { GamesService } from './games.service';
 
 @Component({
   selector: 'app-games',
@@ -31,7 +37,7 @@ export class GamesComponent implements OnInit, OnChanges, OnDestroy {
 
   sub!: Subscription;
 
-  constructor(private service: GamesService) { }
+  constructor(private service: GamesService) {}
 
   ngOnInit(): void {
     this.sub = this.service.subscribeToGames().subscribe({

@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 
 import { EmptyStateComponent } from './shared/components/empty-state/empty-state.component';
 
 const routes: Routes = [
   {
     path: '',
-    loadChildren: () => import('./games/games.module').then(m => m.GamesModule)
+    loadChildren: () =>
+      import('./games/games.module').then((m) => m.GamesModule),
   },
   {
     path: '**',

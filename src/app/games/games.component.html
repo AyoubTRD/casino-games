@@ -6,10 +6,10 @@
 ></app-tabbar>
 
 <div class="px-4 py-8 mx-auto md:px-12 lg:px-20 max-w-screen-2xl">
-    <app-game-list
-      [categories]="categories"
-      [games]="filteredGames"
-    ></app-game-list>
+  <app-game-list
+    [categories]="categories"
+    [games]="filteredGames"
+  ></app-game-list>
 
   <div *ngIf="isLoading">Loading...</div>
 
@@ -22,4 +22,3 @@
     ></app-empty-state>
   </div>
 </div>
-

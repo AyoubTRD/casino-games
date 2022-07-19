@@ -4,9 +4,9 @@ import { NgModule } from '@angular/core';
 import { SharedModule } from '../shared/shared.module';
 import { GameListComponent } from './game-list/game-list.component';
 import { GameListItemComponent } from './game-list-item/game-list-item.component';
-import { TabbarComponent } from './tabbar/tabbar.component';
 import { GamesComponent } from './games.component';
-import { GamesRoutingModule } from './games-routing.module'
+import { GamesRoutingModule } from './games-routing.module';
+import { TabbarComponent } from './tabbar/tabbar.component';
 
 @NgModule({
   declarations: [
