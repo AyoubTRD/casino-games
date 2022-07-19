@@ -8,7 +8,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint": "npx eslint \"src/**/*.{js,jsx,ts,tsx,html}\" --fix",
-    "tsc-check": "tsc check",
+    "type-check": "tsc --noEmit",
     "format": "npx prettier \"src/**/*.{js,jsx,ts,tsx,html,css,scss}\" --write",
     "prepare": "husky install"
   },
