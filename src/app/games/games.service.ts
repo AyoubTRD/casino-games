@@ -11,7 +11,7 @@ import {
 } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
-import { IGame } from './game';
+import { Game } from './store/games.state';
 
 export const GAMES_ENDPOINT = environment.backendUrl + '/games.php';
 export const JACKPOTS_ENDPOINT = environment.backendUrl + '/jackpots.php';
@@ -27,8 +27,8 @@ interface IJackpot {
 export class GamesService {
   constructor(private http: HttpClient) {}
 
-  getGames(): Observable<IGame[]> {
-    return this.http.get<IGame[]>(GAMES_ENDPOINT).pipe(
+  getGames(): Observable<Game[]> {
+    return this.http.get<Game[]>(GAMES_ENDPOINT).pipe(
       switchMap((data) => {
         return this.http.get<IJackpot[]>(JACKPOTS_ENDPOINT).pipe(
           map((jackpots) => {
@@ -45,7 +45,7 @@ export class GamesService {
     );
   }
 
-  subscribeToGames(interval: number = 8000): Observable<IGame[]> {
+  subscribeToGames(interval: number = 8000): Observable<Game[]> {
     return timer(0, interval).pipe(switchMap(() => this.getGames()));
   }
 

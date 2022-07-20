@@ -8,8 +8,8 @@ import {
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 
-import { IGame } from '../game';
 import { GamesService } from '../games.service';
+import { Game, State } from '../store/games.state';
 
 @Component({
   selector: 'app-games',
@@ -20,15 +20,7 @@ export class GamesComponent implements OnInit, OnChanges, OnDestroy {
 
   showJackpotGamesOnly!: boolean;
 
-  constructor(
-    private service: GamesService,
-    private store: Store<{
-      games: {
-        categories: string[];
-        showJackpotGamesOnly: boolean;
-      };
-    }>
-  ) {}
+  constructor(private service: GamesService, private store: Store<State>) {}
 
   handleCategoriesChange(categories: string[]) {
     this.showJackpotGamesOnly = false;
@@ -40,8 +32,8 @@ export class GamesComponent implements OnInit, OnChanges, OnDestroy {
     this.showJackpotGamesOnly = true;
   }
 
-  games: IGame[] = [];
-  filteredGames: IGame[] = [];
+  games: Game[] = [];
+  filteredGames: Game[] = [];
 
   isLoading = true;
   error = false;

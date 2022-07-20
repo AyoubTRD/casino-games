@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-import { IGame } from '../../game';
+import { Game } from '../../store/games.state';
 
 @Component({
   selector: 'app-game-list-item',
@@ -8,7 +8,7 @@ import { IGame } from '../../game';
 })
 export class GameListItemComponent {
   @Input()
-  game!: IGame;
+  game!: Game;
 
   @Input()
   selectedCategories!: string[];

@@ -7,36 +7,52 @@ import {
   setShowJackpotGamesOnly,
   unsetShowJackpotGamesOnly,
 } from './games.actions';
+import { GamesState } from './games.state';
 
-const initialState = {
+const initialState: GamesState = {
   categories: ['new'],
   showJackpotGamesOnly: false,
 };
 
-export const gamesReducer = createReducer(
+export const gamesReducer = createReducer<GamesState>(
   initialState,
 
-  on(addCategories, (state, { categories }) => ({
-    ...state,
-    categories: [...state.categories, ...categories],
-  })),
+  on(
+    addCategories,
+    (state, { categories }): GamesState => ({
+      ...state,
+      categories: [...state.categories, ...categories],
+    })
+  ),
 
-  on(removeCategories, (state, { categories }) => ({
-    ...state,
-    categories: state.categories.filter(
-      (category) => !categories.includes(category)
-    ),
-  })),
+  on(
+    removeCategories,
+    (state, { categories }): GamesState => ({
+      ...state,
+      categories: state.categories.filter(
+        (category) => !categories.includes(category)
+      ),
+    })
+  ),
 
-  on(removeAllCategories, (state) => ({ ...state, categories: [] })),
+  on(
+    removeAllCategories,
+    (state): GamesState => ({ ...state, categories: [] })
+  ),
 
-  on(setShowJackpotGamesOnly, (state) => ({
-    ...state,
-    showJackpotGamesOnly: true,
-  })),
+  on(
+    setShowJackpotGamesOnly,
+    (state): GamesState => ({
+      ...state,
+      showJackpotGamesOnly: true,
+    })
+  ),
 
-  on(unsetShowJackpotGamesOnly, (state) => ({
-    ...state,
-    showJackpotGamesOnly: false,
-  }))
+  on(
+    unsetShowJackpotGamesOnly,
+    (state): GamesState => ({
+      ...state,
+      showJackpotGamesOnly: false,
+    })
+  )
 );

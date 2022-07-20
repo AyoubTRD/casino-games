@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-import { IGame } from '../../game';
+import { Game } from '../../store/games.state';
 
 @Component({
   selector: 'app-game-list',
@@ -11,9 +11,9 @@ export class GameListComponent {
   categories!: string[];
 
   @Input()
-  games!: IGame[];
+  games!: Game[];
 
-  identifyGame(_index: number, game: IGame) {
+  identifyGame(_index: number, game: Game) {
     return game.id;
   }
 }
