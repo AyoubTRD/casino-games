@@ -5,19 +5,30 @@ import {
   OnInit,
   SimpleChanges,
 } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 
-import { IGame } from './game';
-import { GamesService } from './games.service';
+import { IGame } from '../game';
+import { GamesService } from '../games.service';
 
 @Component({
   selector: 'app-games',
   templateUrl: './games.component.html',
 })
 export class GamesComponent implements OnInit, OnChanges, OnDestroy {
-  categories = ['new'];
+  categories!: string[];
 
-  showJackpotGamesOnly = false;
+  showJackpotGamesOnly!: boolean;
+
+  constructor(
+    private service: GamesService,
+    private store: Store<{
+      games: {
+        categories: string[];
+        showJackpotGamesOnly: boolean;
+      };
+    }>
+  ) {}
 
   handleCategoriesChange(categories: string[]) {
     this.showJackpotGamesOnly = false;
@@ -37,9 +48,15 @@ export class GamesComponent implements OnInit, OnChanges, OnDestroy {
 
   sub!: Subscription;
 
-  constructor(private service: GamesService) {}
-
   ngOnInit(): void {
+    this.store.select('games').subscribe({
+      next: ({ categories, showJackpotGamesOnly }) => {
+        this.categories = categories;
+        this.showJackpotGamesOnly = showJackpotGamesOnly;
+
+        this.filterGames();
+      },
+    });
     this.sub = this.service.subscribeToGames().subscribe({
       next: (games) => {
         this.games = games;
@@ -63,6 +80,7 @@ export class GamesComponent implements OnInit, OnChanges, OnDestroy {
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['categories'] || changes['showJackpotGamesOnly']) {
+      console.log(changes);
       this.filterGames();
     }
   }

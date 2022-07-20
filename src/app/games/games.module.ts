@@ -1,12 +1,15 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { StoreModule } from '@ngrx/store';
 
 import { SharedModule } from '../shared/shared.module';
-import { GameListComponent } from './game-list/game-list.component';
-import { GameListItemComponent } from './game-list-item/game-list-item.component';
-import { GamesComponent } from './games.component';
+import { GameListComponent } from './components/game-list/game-list.component';
+import { GameListItemComponent } from './components/game-list-item/game-list-item.component';
+import { GamesComponent } from './components/games.component';
+import { TabbarComponent } from './components/tabbar/tabbar.component';
+import { TabbarButtonComponent } from './components/tabbar-button/tabbar-button.component';
 import { GamesRoutingModule } from './games-routing.module';
-import { TabbarComponent } from './tabbar/tabbar.component';
+import { gamesReducer } from './store/games.reducer';
 
 @NgModule({
   declarations: [
@@ -14,7 +17,13 @@ import { TabbarComponent } from './tabbar/tabbar.component';
     GameListItemComponent,
     TabbarComponent,
     GamesComponent,
+    TabbarButtonComponent,
   ],
-  imports: [CommonModule, SharedModule, GamesRoutingModule],
+  imports: [
+    CommonModule,
+    SharedModule,
+    GamesRoutingModule,
+    StoreModule.forFeature('games', gamesReducer),
+  ],
 })
 export class GamesModule {}
