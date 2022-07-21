@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import * as Sentry from '@sentry/angular';
-import { catchError, map, Observable, switchMap, throwError } from 'rxjs';
+import { catchError, map, mergeMap, Observable, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 import { Game } from './game';
@@ -22,7 +22,7 @@ export class GamesService {
 
   getGames(): Observable<Game[]> {
     return this.http.get<Game[]>(GAMES_ENDPOINT).pipe(
-      switchMap((data) => {
+      mergeMap((data) => {
         return this.http.get<IJackpot[]>(JACKPOTS_ENDPOINT).pipe(
           map((jackpots) => {
             for (const jackpot of jackpots) {

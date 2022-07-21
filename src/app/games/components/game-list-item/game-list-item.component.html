@@ -5,13 +5,13 @@
     <div class="relative overflow-hidden rounded-md">
       <div
         *ngIf="!!game.jackpotAmount"
-        class="absolute top-0 left-0 flex items-center justify-center w-full h-10 font-black text-white bg-gray-900 font-heading bg-opacity-30"
+        class="absolute top-0 left-0 flex items-center justify-center w-full h-10 font-black text-white bg-gray-900 font-heading bg-opacity-40"
       >
         {{ game.jackpotAmount | currency: '£' }}
       </div>
 
       <div
-        class="absolute bottom-0 left-0 z-30 w-full p-5 text-white transition translate-y-full bg-gray-800 rounded-t-xl game-details"
+        class="absolute bottom-0 left-0 z-30 w-full p-5 text-white transition translate-y-full bg-secondary rounded-t-xl game-details"
       >
         <h2 class="mb-3 text-xl font-black font-heading">{{ game.name }}</h2>
 

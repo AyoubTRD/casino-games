@@ -16,8 +16,8 @@ const buttons: TabbarButton[] = [
     categories: ['slots'],
   },
   {
-    label: 'Live',
-    categories: ['live'],
+    label: 'Classic',
+    categories: ['classic'],
   },
   {
     label: 'Jackpots',
