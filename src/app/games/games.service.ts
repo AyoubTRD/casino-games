@@ -1,17 +1,13 @@
-import { Injectable } from '@angular/core';
-
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import * as Sentry from '@sentry/angular';
+import { catchError, map, mergeMap, Observable, throwError } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
-import { GAMES_ENDPOINT, JACKPOTS_ENDPOINT } from 'src/constants/global';
-import { IGame } from './game';
-import {
-  catchError,
-  map,
-  Observable,
-  switchMap,
-  throwError,
-  timer,
-} from 'rxjs';
+import { Game } from './game';
+
+export const GAMES_ENDPOINT = environment.backendUrl + '/games.php';
+export const JACKPOTS_ENDPOINT = environment.backendUrl + '/jackpots.php';
 
 interface IJackpot {
   game: string;
@@ -24,9 +20,9 @@ interface IJackpot {
 export class GamesService {
   constructor(private http: HttpClient) {}
 
-  getGames(): Observable<IGame[]> {
-    return this.http.get<IGame[]>(GAMES_ENDPOINT).pipe(
-      switchMap((data) => {
+  getGames(): Observable<Game[]> {
+    return this.http.get<Game[]>(GAMES_ENDPOINT).pipe(
+      mergeMap((data) => {
         return this.http.get<IJackpot[]>(JACKPOTS_ENDPOINT).pipe(
           map((jackpots) => {
             for (const jackpot of jackpots) {
@@ -42,14 +38,8 @@ export class GamesService {
     );
   }
 
-  subscribeToGames(interval: number = 8000): Observable<IGame[]> {
-    return timer(0, interval).pipe(switchMap(() => this.getGames()));
-  }
-
   private handleError(err: HttpErrorResponse) {
-    // Report error to Sentry
-    console.error(err);
-
+    Sentry.captureException(err);
     return throwError(() => err);
   }
 }

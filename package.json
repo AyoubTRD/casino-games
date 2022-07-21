@@ -8,6 +8,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint": "npx eslint \"src/**/*.{js,jsx,ts,tsx,html}\" --fix",
+    "type-check": "tsc --noEmit",
     "format": "npx prettier \"src/**/*.{js,jsx,ts,tsx,html,css,scss}\" --write",
     "prepare": "husky install"
   },
@@ -21,6 +22,11 @@
     "@angular/platform-browser": "^14.0.0",
     "@angular/platform-browser-dynamic": "^14.0.0",
     "@angular/router": "^14.0.0",
+    "@ngrx/effects": "14.0.2",
+    "@ngrx/eslint-plugin": "14.0.2",
+    "@ngrx/store": "^14.0.2",
+    "@ngrx/store-devtools": "14.0.2",
+    "@sentry/angular": "^7.7.0",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"

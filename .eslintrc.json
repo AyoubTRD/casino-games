@@ -1,7 +1,6 @@
 {
   "root": true,
   "ignorePatterns": ["projects/**/*"],
-
   "overrides": [
     {
       "files": ["*.ts"],
@@ -16,7 +15,6 @@
       "plugins": ["simple-import-sort"],
       "rules": {
         "simple-import-sort/imports": "warn",
-
         "@angular-eslint/directive-selector": [
           "error",
           {
@@ -39,6 +37,17 @@
       "files": ["*.html"],
       "extends": ["plugin:@angular-eslint/template/recommended"],
       "rules": {}
+    },
+    {
+      "files": ["*.ts"],
+      "extends": ["plugin:@ngrx/recommended-requiring-type-checking"]
     }
-  ]
+  ],
+  "parserOptions": {
+    "ecmaVersion": "latest"
+  },
+
+  "env": {
+    "es6": true
+  }
 }

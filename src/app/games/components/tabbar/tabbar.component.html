@@ -1,0 +1,8 @@
+<nav
+  class="z-40 flex w-full h-12 overflow-x-auto overflow-y-hidden bg-secondary md:h-24 lg:h-12 md:grid md:grid-cols-5 lg:grid-cols-10"
+>
+  <app-tabbar-button
+    *ngFor="let button of buttons"
+    [button]="button"
+  ></app-tabbar-button>
+</nav>

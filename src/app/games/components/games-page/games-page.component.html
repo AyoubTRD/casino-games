@@ -1,0 +1,38 @@
+<div class="flex flex-col h-full">
+  <app-tabbar></app-tabbar>
+
+  <main class="flex-grow h-full overflow-y-auto bg-gray-50">
+    <div class="h-full px-4 py-8 mx-auto md:px-12 lg:px-20 max-w-screen-2xl">
+      <div *ngIf="(hasInitiallyLoaded$ | async) === false">
+        <app-game-list
+          [showSkeleton]="true"
+          [skeletonCount]="13"
+        ></app-game-list>
+      </div>
+
+      <ng-container *ngIf="hasInitiallyLoaded$ | async">
+        <app-game-list
+          *ngIf="filteredGames$ | async as filteredGames"
+          [games]="filteredGames"
+        ></app-game-list>
+
+        <div *ngIf="error$ | async as error">
+          <app-empty-state title="Error" [subtitle]="error"> </app-empty-state>
+        </div>
+
+        <div
+          *ngIf="
+            (hasInitiallyLoaded$ | async) &&
+            !(filteredGames$ | async)?.length &&
+            (error$ | async) === null
+          "
+          class="flex items-center justify-center h-full"
+        >
+          <app-empty-state
+            subtitle="No games were found for the selected category"
+          ></app-empty-state>
+        </div>
+      </ng-container>
+    </div>
+  </main>
+</div>

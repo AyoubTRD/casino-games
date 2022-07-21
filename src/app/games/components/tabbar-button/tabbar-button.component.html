@@ -1,0 +1,10 @@
+<button
+  [ngClass]="{
+    'font-medium transition whitespace-nowrap md:whitespace-normal text-white h-full inline-block px-5 w-48 md:w-full md:text-lg lg:text-base xl:text-lg': true,
+    'hover:bg-primary-500': (isSelected$ | async) === false,
+    'bg-primary-500': (isSelected$ | async)
+  }"
+  (click)="handleClick()"
+>
+  {{ button.label }}
+</button>
