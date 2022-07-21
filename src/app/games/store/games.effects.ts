@@ -1,9 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { map, mergeMap } from 'rxjs';
+import { catchError, map, of, switchMap } from 'rxjs';
 
 import { GamesService } from '../games.service';
-import { loadGames, loadGamesSuccess, setGamesLoading } from './games.actions';
+import {
+  loadGames,
+  loadGamesFailure,
+  loadGamesSuccess,
+  setGamesLoading,
+} from './games.actions';
 
 @Injectable()
 export class GamesEffects {
@@ -12,10 +17,13 @@ export class GamesEffects {
   loadGames$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(loadGames),
-      mergeMap(() =>
-        this.service
-          .getGames()
-          .pipe(map((games) => loadGamesSuccess({ games })))
+      switchMap(() =>
+        this.service.getGames().pipe(
+          map((games) => loadGamesSuccess({ games })),
+          catchError(() =>
+            of(loadGamesFailure({ error: 'Failed to load the games' }))
+          )
+        )
       )
     );
   });

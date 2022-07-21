@@ -11,14 +11,15 @@
           [games]="filteredGames"
         ></app-game-list>
 
-        <div *ngIf="error$ | async">
-          <app-empty-state title="Error" subtitle="Failed to load the games">
-          </app-empty-state>
+        <div *ngIf="error$ | async as error">
+          <app-empty-state title="Error" [subtitle]="error"> </app-empty-state>
         </div>
 
         <div
           *ngIf="
-            (hasInitiallyLoaded$ | async) && !(filteredGames$ | async)?.length
+            (hasInitiallyLoaded$ | async) &&
+            !(filteredGames$ | async)?.length &&
+            (error$ | async) === null
           "
           class="mt-24 text-center md:mt-52"
         >

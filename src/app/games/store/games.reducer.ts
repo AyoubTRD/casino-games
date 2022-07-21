@@ -1,14 +1,11 @@
 import { createReducer, on } from '@ngrx/store';
 
 import {
-  addCategories,
+  changeCategories,
   loadGamesFailure,
   loadGamesSuccess,
-  removeAllCategories,
-  removeCategories,
   setGamesLoading,
   setShowJackpotGamesOnly,
-  unsetShowJackpotGamesOnly,
 } from './games.actions';
 import { GamesState } from './games.state';
 
@@ -24,41 +21,20 @@ export const gamesReducer = createReducer<GamesState>(
   initialState,
 
   on(
-    addCategories,
+    changeCategories,
     (state, { categories }): GamesState => ({
       ...state,
-      categories: [...state.categories, ...categories],
+      categories,
+      showJackpotGamesOnly: false,
     })
-  ),
-
-  on(
-    removeCategories,
-    (state, { categories }): GamesState => ({
-      ...state,
-      categories: state.categories.filter(
-        (category) => !categories.includes(category)
-      ),
-    })
-  ),
-
-  on(
-    removeAllCategories,
-    (state): GamesState => ({ ...state, categories: [] })
   ),
 
   on(
     setShowJackpotGamesOnly,
     (state): GamesState => ({
       ...state,
+      categories: [],
       showJackpotGamesOnly: true,
-    })
-  ),
-
-  on(
-    unsetShowJackpotGamesOnly,
-    (state): GamesState => ({
-      ...state,
-      showJackpotGamesOnly: false,
     })
   ),
 

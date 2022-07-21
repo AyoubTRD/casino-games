@@ -31,11 +31,6 @@ export const selectFilteredGames = createSelector(
         )
 );
 
-export const selectHasInitiallyLoaded = createSelector(
-  selectAllGames,
-  (games) => games.length > 0
-);
-
 export const selectIsLoadingGames = createSelector(
   selectGamesFeatureState,
   (state) => state.isLoadingGames
@@ -44,4 +39,12 @@ export const selectIsLoadingGames = createSelector(
 export const selectError = createSelector(
   selectGamesFeatureState,
   (state) => state.error
+);
+
+export const selectHasInitiallyLoaded = createSelector(
+  selectAllGames,
+  selectIsLoadingGames,
+  selectError,
+  (games, isLoadingGames, error) =>
+    (games.length > 0 && !isLoadingGames) || !!error
 );
