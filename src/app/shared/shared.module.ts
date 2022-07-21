@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { ButtonComponent } from './components/button/button.component';
 import { EmptyStateComponent } from './components/empty-state/empty-state.component';
+import { NotFoundPageComponent } from './components/not-found-page/not-found-page.component';
 import { RibbonComponent } from './components/ribbon/ribbon.component';
 import { SkeletonComponent } from './components/skeleton/skeleton.component';
 
@@ -12,6 +13,7 @@ import { SkeletonComponent } from './components/skeleton/skeleton.component';
     ButtonComponent,
     SkeletonComponent,
     RibbonComponent,
+    NotFoundPageComponent,
   ],
   exports: [
     EmptyStateComponent,
