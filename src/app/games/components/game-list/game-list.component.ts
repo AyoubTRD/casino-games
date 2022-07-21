@@ -9,8 +9,6 @@ import { Game } from '../../game';
 })
 export class GameListComponent {
   @Input()
-  categories: string[] = [];
-  @Input()
   games: Game[] = [];
 
   @Input()

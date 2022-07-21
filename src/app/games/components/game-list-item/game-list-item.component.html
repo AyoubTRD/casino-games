@@ -1,7 +1,7 @@
 <li class="flex justify-center">
   <div class="relative">
-    <app-ribbon *ngIf="shouldShowNewBadge()">NEW</app-ribbon>
-    <app-ribbon *ngIf="shouldShowTopBadge()">TOP</app-ribbon>
+    <app-ribbon *ngIf="showNewBadge$ | async">NEW</app-ribbon>
+    <app-ribbon *ngIf="showTopBadge$ | async">TOP</app-ribbon>
     <div class="relative overflow-hidden rounded-md">
       <div
         *ngIf="!!game.jackpotAmount"

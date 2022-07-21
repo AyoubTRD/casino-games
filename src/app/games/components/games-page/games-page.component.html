@@ -14,7 +14,6 @@
         <app-game-list
           *ngIf="filteredGames$ | async as filteredGames"
           [games]="filteredGames"
-          [categories]="(categories$ | async) || []"
         ></app-game-list>
 
         <div *ngIf="error$ | async as error">

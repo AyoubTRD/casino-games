@@ -1,5 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { map, Observable } from 'rxjs';
 
 import { selectGamesFeatureState } from '../../store';
 import { GamesTabbarActions } from '../../store/actions';
@@ -14,33 +15,26 @@ export interface TabbarButton {
   selector: 'app-tabbar-button',
   templateUrl: './tabbar-button.component.html',
 })
-export class TabbarButtonComponent implements OnInit {
+export class TabbarButtonComponent {
   @Input()
   button!: TabbarButton;
 
-  categories!: string[];
-  showJackpotGamesOnly!: boolean;
-
-  isSelected!: boolean;
-
-  constructor(private store: Store) {}
-
-  ngOnInit() {
-    this.store.select(selectGamesFeatureState).subscribe({
-      next: (games) => {
-        this.categories = games.categories;
-        this.showJackpotGamesOnly = games.showJackpotGamesOnly;
-
-        if (this.button.isJackpot) this.isSelected = this.showJackpotGamesOnly;
+  isSelected$: Observable<boolean> = this.store
+    .select(selectGamesFeatureState)
+    .pipe(
+      map(({ showJackpotGamesOnly, categories }) => {
+        if (this.button.isJackpot) return showJackpotGamesOnly;
         else
-          this.isSelected =
+          return (
             !!this.button.categories &&
             this.button.categories.every((category) =>
-              this.categories.includes(category)
-            );
-      },
-    });
-  }
+              categories.includes(category)
+            )
+          );
+      })
+    );
+
+  constructor(private store: Store) {}
 
   handleClick(): void {
     if (this.button.isJackpot) {
