@@ -1,10 +1,8 @@
 <nav
-  class="fixed top-0 left-0 z-40 flex w-full h-12 overflow-x-auto overflow-y-hidden bg-gray-800 md:h-24 lg:h-12 md:grid md:grid-cols-5 lg:grid-cols-10"
+  class="z-40 flex w-full h-12 overflow-x-auto overflow-y-hidden bg-secondary md:h-24 lg:h-12 md:grid md:grid-cols-5 lg:grid-cols-10"
 >
   <app-tabbar-button
     *ngFor="let button of buttons"
     [button]="button"
   ></app-tabbar-button>
 </nav>
-<!-- The role of this element is to occupy the space the tabbar would have occupied if it wasn't fixed -->
-<div class="h-12 md:h-24 lg:h-12"></div>

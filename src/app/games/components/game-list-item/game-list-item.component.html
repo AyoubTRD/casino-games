@@ -8,15 +8,11 @@
     </div>
 
     <div
-      class="absolute bottom-0 left-0 z-30 w-full p-5 text-white transition translate-y-full bg-gray-800 rounded-xl game-details"
+      class="absolute bottom-0 left-0 z-30 w-full p-5 text-white transition translate-y-full bg-gray-800 rounded-t-xl game-details"
     >
       <h2 class="mb-3 text-xl font-black font-heading">{{ game.name }}</h2>
 
-      <button
-        class="w-full py-2.5 text-base font-black text-white bg-green-500 rounded-md font-heading"
-      >
-        Play
-      </button>
+      <app-button [fullWidth]="true"> Play </app-button>
     </div>
 
     <img

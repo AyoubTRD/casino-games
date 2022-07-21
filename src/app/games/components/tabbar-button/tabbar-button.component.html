@@ -1,8 +1,8 @@
 <button
   [ngClass]="{
-    'font-medium whitespace-nowrap md:whitespace-normal text-white h-full inline-block px-5 w-48 md:w-full md:text-lg lg:text-base xl:text-lg': true,
-    'hover:bg-green-400': !isSelected,
-    'bg-green-400': isSelected
+    'font-medium transition whitespace-nowrap md:whitespace-normal text-white h-full inline-block px-5 w-48 md:w-full md:text-lg lg:text-base xl:text-lg': true,
+    'hover:bg-primary': !isSelected,
+    'bg-primary': isSelected
   }"
   (click)="handleClick()"
 >

@@ -15,14 +15,25 @@ export const selectShowJackpotGamesOnly = createSelector(
   (state) => state.showJackpotGamesOnly
 );
 
+export const selectAllGames = createSelector(
+  selectGamesFeatureState,
+  (state) => state.games
+);
+
 export const selectFilteredGames = createSelector(
   selectGamesFeatureState,
-  ({ games, categories, showJackpotGamesOnly }) =>
+  selectAllGames,
+  ({ categories, showJackpotGamesOnly }, games) =>
     showJackpotGamesOnly
       ? games.filter((game) => !!game.jackpotAmount)
       : games.filter((game) =>
           game.categories.some((category) => categories.includes(category))
         )
+);
+
+export const selectHasInitiallyLoaded = createSelector(
+  selectAllGames,
+  (games) => games.length > 0
 );
 
 export const selectIsLoadingGames = createSelector(
