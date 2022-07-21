@@ -1,17 +1,28 @@
-<li class="flex justify-center cursor-pointer hover:z-10">
-  <div
-    class="relative overflow-hidden transition rounded-md hover:scale-125 hover:z-10"
-  >
+<li class="flex justify-center">
+  <div class="relative overflow-hidden rounded-md">
+    <div
+      *ngIf="!!game.jackpotAmount"
+      class="absolute top-0 left-0 flex items-center justify-center w-full h-10 font-black text-white bg-gray-900 font-heading bg-opacity-30"
+    >
+      {{ game.jackpotAmount | currency: '£' }}
+    </div>
+
+    <div
+      class="absolute bottom-0 left-0 z-30 w-full p-5 text-white transition translate-y-full bg-gray-800 rounded-xl game-details"
+    >
+      <h2 class="mb-3 text-xl font-black font-heading">{{ game.name }}</h2>
+
+      <button
+        class="w-full py-2.5 text-base font-black text-white bg-green-500 rounded-md font-heading"
+      >
+        Play
+      </button>
+    </div>
+
     <img
       src="{{ game.image }}"
       alt="{{ game.name }}'s image"
       class="rounded-lg md:w-full h-30 sm:h-48 md:h-44"
     />
-    <div
-      *ngIf="!!game.jackpotAmount"
-      class="absolute top-0 left-0 flex items-center justify-center w-full h-10 font-bold text-white bg-gray-900 bg-opacity-30"
-    >
-      {{ game.jackpotAmount | currency }}
-    </div>
   </div>
 </li>

@@ -5,6 +5,7 @@ import { Game } from '../../store/games.state';
 @Component({
   selector: 'app-game-list-item',
   templateUrl: './game-list-item.component.html',
+  styleUrls: ['./game-list-item.component.css'],
 })
 export class GameListItemComponent {
   @Input()
