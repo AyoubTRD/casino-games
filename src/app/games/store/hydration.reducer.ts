@@ -11,10 +11,10 @@ export const gamesHydrationMetaReducer: MetaReducer<GamesState> = (
       const categories = params.get('categories');
       const showJackpotGamesOnly = params.get('showJackpotGamesOnly');
       return {
-        ...initialState,
+        ...(state || initialState),
         categories: categories
           ? categories.split(',')
-          : initialState.categories,
+          : (state || initialState).categories,
         showJackpotGamesOnly: showJackpotGamesOnly === 'true',
       };
     }
