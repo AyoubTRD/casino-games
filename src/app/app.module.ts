@@ -2,6 +2,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { APP_INITIALIZER, ErrorHandler, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { Router } from '@angular/router';
+import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import * as Sentry from '@sentry/angular';
@@ -21,6 +22,7 @@ import { AppRoutingModule } from './app-routing.module';
       maxAge: 25,
       logOnly: environment.production,
     }),
+    EffectsModule.forRoot([]),
   ],
   providers: [
     {

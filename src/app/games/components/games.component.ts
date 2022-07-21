@@ -8,7 +8,7 @@ import {
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 
-import { GamesService } from '../games.service';
+import { loadGames } from '../store/games.actions';
 import { Game, State } from '../store/games.state';
 
 @Component({
@@ -20,7 +20,7 @@ export class GamesComponent implements OnInit, OnChanges, OnDestroy {
 
   showJackpotGamesOnly!: boolean;
 
-  constructor(private service: GamesService, private store: Store<State>) {}
+  constructor(private store: Store<State>) {}
 
   handleCategoriesChange(categories: string[]) {
     this.showJackpotGamesOnly = false;
@@ -42,21 +42,18 @@ export class GamesComponent implements OnInit, OnChanges, OnDestroy {
 
   ngOnInit(): void {
     this.store.select('games').subscribe({
-      next: ({ categories, showJackpotGamesOnly }) => {
+      next: ({ categories, showJackpotGamesOnly, games, isLoadingGames }) => {
         this.categories = categories;
         this.showJackpotGamesOnly = showJackpotGamesOnly;
+
+        this.games = games;
+        this.isLoading = isLoadingGames;
 
         this.filterGames();
       },
     });
-    this.sub = this.service.subscribeToGames().subscribe({
-      next: (games) => {
-        this.games = games;
-        this.isLoading = false;
-        this.filterGames();
-      },
-      error: () => (this.error = true),
-    });
+
+    this.store.dispatch(loadGames());
   }
 
   filterGames() {

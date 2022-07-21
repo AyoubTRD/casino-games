@@ -7,7 +7,7 @@ import {
   setShowJackpotGamesOnly,
   unsetShowJackpotGamesOnly,
 } from '../../store/games.actions';
-import { State } from '../../store/games.state';
+import { selectGamesFeatureState } from '../../store/games.selectors';
 
 export interface TabbarButton {
   categories?: string[];
@@ -28,10 +28,10 @@ export class TabbarButtonComponent implements OnInit {
 
   isSelected!: boolean;
 
-  constructor(private store: Store<State>) {}
+  constructor(private store: Store) {}
 
   ngOnInit() {
-    this.store.select('games').subscribe({
+    this.store.select(selectGamesFeatureState).subscribe({
       next: (games) => {
         this.categories = games.categories;
         this.showJackpotGamesOnly = games.showJackpotGamesOnly;

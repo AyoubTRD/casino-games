@@ -11,6 +11,9 @@ export interface Game {
 export interface GamesState {
   categories: string[];
   showJackpotGamesOnly: boolean;
+  games: Game[];
+  error: string | null;
+  isLoadingGames: boolean;
 }
 
 export interface State extends AppState.State {
