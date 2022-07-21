@@ -1,11 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 
-import {
-  changeCategories,
-  setShowJackpotGamesOnly,
-} from '../../store/games.actions';
-import { selectGamesFeatureState } from '../../store/games.selectors';
+import { selectGamesFeatureState } from '../../store';
+import { GamesTabbarActions } from '../../store/actions';
 
 export interface TabbarButton {
   categories?: string[];
@@ -47,10 +44,12 @@ export class TabbarButtonComponent implements OnInit {
 
   handleClick(): void {
     if (this.button.isJackpot) {
-      this.store.dispatch(setShowJackpotGamesOnly());
+      this.store.dispatch(GamesTabbarActions.setShowJackpotGamesOnly());
     } else if (this.button.categories) {
       this.store.dispatch(
-        changeCategories({ categories: this.button.categories })
+        GamesTabbarActions.changeCategories({
+          categories: this.button.categories,
+        })
       );
     }
   }

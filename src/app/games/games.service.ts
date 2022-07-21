@@ -4,9 +4,9 @@ import * as Sentry from '@sentry/angular';
 import { catchError, map, Observable, switchMap, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
-import { Game } from './store/games.state';
+import { Game } from './game';
 
-export const GAMES_ENDPOINT = environment.backendUrl + '/games.php.zeb';
+export const GAMES_ENDPOINT = environment.backendUrl + '/games.php';
 export const JACKPOTS_ENDPOINT = environment.backendUrl + '/jackpots.php';
 
 interface IJackpot {

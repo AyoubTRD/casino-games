@@ -3,12 +3,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, of, switchMap } from 'rxjs';
 
 import { GamesService } from '../games.service';
-import {
-  loadGames,
-  loadGamesFailure,
-  loadGamesSuccess,
-  setGamesLoading,
-} from './games.actions';
+import { GamesApiActions } from './actions/';
 
 @Injectable()
 export class GamesEffects {
@@ -16,12 +11,16 @@ export class GamesEffects {
 
   loadGames$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(loadGames),
+      ofType(GamesApiActions.loadGames),
       switchMap(() =>
         this.service.getGames().pipe(
-          map((games) => loadGamesSuccess({ games })),
+          map((games) => GamesApiActions.loadGamesSuccess({ games })),
           catchError(() =>
-            of(loadGamesFailure({ error: 'Failed to load the games' }))
+            of(
+              GamesApiActions.loadGamesFailure({
+                error: 'Failed to load the games',
+              })
+            )
           )
         )
       )
@@ -30,8 +29,8 @@ export class GamesEffects {
 
   setGamesLoading$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(loadGames),
-      map(() => setGamesLoading())
+      ofType(GamesApiActions.loadGames),
+      map(() => GamesApiActions.setGamesLoading())
     );
   });
 }

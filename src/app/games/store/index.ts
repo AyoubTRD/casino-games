@@ -1,6 +1,11 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 
-import { GamesState } from './games.state';
+import * as AppState from '../../app.state';
+import { GamesState } from './games.reducer';
+
+export interface State extends AppState.State {
+  games: GamesState;
+}
 
 export const selectGamesFeatureState =
   createFeatureSelector<GamesState>('games');
@@ -43,8 +48,6 @@ export const selectError = createSelector(
 
 export const selectHasInitiallyLoaded = createSelector(
   selectAllGames,
-  selectIsLoadingGames,
   selectError,
-  (games, isLoadingGames, error) =>
-    (games.length > 0 && !isLoadingGames) || !!error
+  (games, error) => games.length > 0 || !!error
 );
