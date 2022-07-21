@@ -22,10 +22,10 @@ export const gamesHydrationMetaReducer: MetaReducer<GamesState> = (
     const nextState = reducer(state, action);
 
     const params = new URLSearchParams(window.location.search);
-    params.set('categories', nextState?.categories.join(',') || '');
+    params.set('categories', nextState.categories.join(','));
     params.set(
       'showJackpotGamesOnly',
-      nextState?.showJackpotGamesOnly ? 'true' : 'false'
+      nextState.showJackpotGamesOnly ? 'true' : 'false'
     );
 
     var newUrl =
