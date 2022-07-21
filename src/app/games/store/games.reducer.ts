@@ -11,7 +11,7 @@ export interface GamesState {
   isLoadingGames: boolean;
 }
 
-const initialState: GamesState = {
+export const initialState: GamesState = {
   categories: ['new'],
   showJackpotGamesOnly: false,
   games: [],

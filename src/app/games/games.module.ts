@@ -10,8 +10,8 @@ import { GamesPageComponent } from './components/games-page/games-page.component
 import { TabbarComponent } from './components/tabbar/tabbar.component';
 import { TabbarButtonComponent } from './components/tabbar-button/tabbar-button.component';
 import { GamesRoutingModule } from './games-routing.module';
+import { gamesReducer, metaReducers } from './store';
 import { GamesEffects } from './store/games.effects';
-import { gamesReducer } from './store/games.reducer';
 
 @NgModule({
   declarations: [
@@ -25,7 +25,9 @@ import { gamesReducer } from './store/games.reducer';
     CommonModule,
     SharedModule,
     GamesRoutingModule,
-    StoreModule.forFeature('games', gamesReducer),
+    StoreModule.forFeature('games', gamesReducer, {
+      metaReducers,
+    }),
     EffectsModule.forFeature([GamesEffects]),
   ],
 })
