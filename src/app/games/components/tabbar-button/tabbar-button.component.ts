@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { map, Observable } from 'rxjs';
 
-import { selectGamesFeatureState } from '../../store';
+import { selectGameFilteringParameters } from '../../store';
 import { GamesTabbarActions } from '../../store/actions';
 
 export interface TabbarButton {
@@ -20,7 +20,7 @@ export class TabbarButtonComponent {
   button!: TabbarButton;
 
   isSelected$: Observable<boolean> = this.store
-    .select(selectGamesFeatureState)
+    .select(selectGameFilteringParameters)
     .pipe(
       map(({ showJackpotGamesOnly, categories }) => {
         if (this.button.isJackpot) return showJackpotGamesOnly;
